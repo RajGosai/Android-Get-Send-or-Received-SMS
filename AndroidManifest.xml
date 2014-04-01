@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="raj.getsendmsg"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="17" />
+ <uses-feature android:name="android.hardware.telephony" />
+        
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+	<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+	<uses-permission android:name="android.permission.WRITE_CALENDAR"></uses-permission>
+	<uses-permission android:name="android.permission.READ_CALENDAR"></uses-permission>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="raj.getsendmsg.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+         <receiver android:name=".SMSTrackerActivity" android:enabled="true">
+            <intent-filter android:priority="101">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+            
+            <intent-filter android:priority="101">
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
+
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+            
+            <intent-filter android:priority="101">
+                <action android:name="com.android.mms.transaction.MESSAGE_SENT" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
